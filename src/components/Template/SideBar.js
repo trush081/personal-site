@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import ContactIcons from '../Contact/ContactIcons';
+import Greetings from '../Sidebar/Greetings';
 
 const { PUBLIC_URL } = process.env; // set automatically from package.json:homepage
 
@@ -12,21 +13,16 @@ const SideBar = () => (
         <img src={`${PUBLIC_URL}/images/me.jpg`} alt="" />
       </Link>
       <header>
-        <h2>Michael D&apos;Angelo</h2>
-        <p><a href="mailto:michael.l.dangelo@gmail.com">michael.l.dangelo@gmail.com</a></p>
+        <h2>Trenton Rush</h2>
+        <p><a href="mailto:trush081@gmail.com">Trush081@gmail.com</a></p>
       </header>
     </section>
 
     <section className="blurb">
       <h2>About</h2>
-      <p>Hi, I&apos;m Michael. I like building things.
-        I am a <a href="https://icme.stanford.edu/">Stanford ICME</a> graduate, YC Alumni, and
-        the co-founder and CTO of <a href="https://arthena.com">Arthena</a>. Before Arthena I was
-        at <a href="https://matroid.com">Matroid</a>
-        , <a href="https://planet.com">Planet</a>
-        , <a href="https://planetaryresources.com">Planetary Resources</a>
-        , <a href="https://facebook.com">Facebook</a>
-        , and <a href="https://seds.org">SEDS</a>.
+      <p><Greetings />
+        I am a <a href="https://www.uky.edu/">University of Kentucky</a> graduate in the College of Engineering, and
+        currently employed by <a href="https://www.brooksource.com/">Brooksource</a> as a Consultant for <a href="https://www.papajohns.com">Papa Johns International</a>.
       </p>
       <ul className="actions">
         <li>
@@ -37,7 +33,8 @@ const SideBar = () => (
 
     <section id="footer">
       <ContactIcons />
-      <p className="copyright">&copy; Michael D&apos;Angelo <Link to="/">mldangelo.com</Link>.</p>
+      <p className="copyright">Trenton Rush <Link to="/">TrentonRush.com</Link>.</p>
+      <p className="copyright">&copy; Credit to <a href="https://www.mldangelo.com">mldangelo.com</a>.</p>
     </section>
   </section>
 );

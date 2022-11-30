@@ -32,7 +32,7 @@
 	);
 
 // Palette.
-	$palette: (
+	$alette: (
 		bg:							#ffffff,
 		bg-alt:						#f4f4f4,
 		fg:							#646464,
@@ -42,4 +42,16 @@
 		border-bg:					rgba(160,160,160,0.075),
 		border-alt:					rgba(160,160,160,0.65),
 		accent:						#2e59ba
+	);
+
+	$palette: (
+		bg:							#646464,
+		bg-alt:						#3c3b3b,
+		fg:							#ffffff,
+		fg-bold:					#f4f4f4,
+		fg-light:					#aaaaaa,
+		border:						rgba(160,160,160,0.3),
+		border-bg:					rgba(160,160,160,0.075),
+		border-alt:					rgba(160,160,160,0.65),
+		accent:						#00fe7a
 	);

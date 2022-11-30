@@ -1,16 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-// Validates the first half of an email address.
-const validateText = (text) => {
-  // NOTE: Passes RFC 5322 but not tested on google's standard.
-  // eslint-disable-next-line no-useless-escape
-  const re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))$/;
-  return re.test(text) || text.length === 0;
-};
-
 const messages = [
-  'trush081',
+  'Hi.',
+  'Hello.',
+  'Hola.',
+  'Good morning.',
+  'Or afternoon.',
+  'Or evening.',
+  'Or maybe night.',
+  'Whatever time of day,',
+  'Enjoy looking at my site.',
+  'Thanks for stopping by,',
 ];
 
 const useInterval = (callback, delay) => {
@@ -31,7 +32,7 @@ const useInterval = (callback, delay) => {
   }, [delay]);
 };
 
-const EmailLink = ({ loopMessage }) => {
+const Greetings = ({ loopMessage }) => {
   const hold = 50; // ticks to wait after message is complete before rendering next message
   const delay = 50; // tick length in mS
 
@@ -64,24 +65,18 @@ const EmailLink = ({ loopMessage }) => {
   return (
     <div
       className="inline-container"
-      style={validateText(message) ? {} : { color: 'red' }}
-      onMouseEnter={() => setIsActive(false)}
-      onMouseLeave={() => (idx < messages.length) && setIsActive(true)}
     >
-      <a href={validateText(message) ? `mailto:${message}@gmail.com` : ''}>
-        <span>{message}</span>
-        <span>@gmail.com</span>
-      </a>
+      <span>{message} I am glad you&apos;re here!</span>
     </div>
   );
 };
 
-EmailLink.defaultProps = {
+Greetings.defaultProps = {
   loopMessage: false,
 };
 
-EmailLink.propTypes = {
+Greetings.propTypes = {
   loopMessage: PropTypes.bool,
 };
 
-export default EmailLink;
+export default Greetings;
