@@ -1,11 +1,11 @@
 
 # Intro
 
-I am a recent graduate of the University of Kentucky, College of Engineering. I orginally was going to do mission work after college, but changed my plans after meeting my lovely girlfriend during my senior year. With the recent change of plans, I put all 110% of my time and focus into software. I never lost my dream of going overseas to do mission work through the [IMB](https://www.imb.org/), but my path to get there changed.
+I am a recent graduate of the University of Kentucky, College of Engineering. I orginally was going to do mission work after college, but changed my plans during my senior year. (There were a lot of reasons for this, but if you are interested, please message me.) With the recent change of plans, my time and focus went into increasing my knowledge of software. I put a lot of effort into making sure I was carrer ready for the industry, and thankfully all that time and focus payed off.  I still have not lost my main focus, however, of wanting to go back overseas for mission work (hopefully through the [IMB](https://www.imb.org/)), but my path to get there changed and I am super thankful for all the different ways I have grown through that change. 
 
-# Currently
+# What I'm currently learning
 
-At Papa Johns International, I have learned nearly every skill besides C++. More specificly, I have gained a passion for working with Google Cloud Platform and anything that has to do with middleware, along with rekindling my first language, Java. Slowly becoming the pipeline SME for my current team.
+At Papa Johns International, I've been able to have an amazing first experience out of college. Some of the tech that I've been diving into most: Spring Boot, Gradle, Jenkins, Google Cloud, and a lot of other major corporate tech that I never got to experience in college. So far, it's been a great experience and a lot of my co-workers and the higher up engineers have been quite impressed with how quickly I have been able to catch on and contribute at the same level as them. Overall, I'm super eager to keep diving into new systems, repos, and tech.
 
 # Some history in tech
 
