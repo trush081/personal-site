@@ -30,7 +30,7 @@ At Papa Johns International, I've been able to have an amazing first experience 
 - Springtime
 - [Chess](https://friend.chess.com/HxjE)
 - [Christian Literature](https://www.goodreads.com/trentonrush)
-- Primarily Christian Podcasts ([Knowing Faith](https://www.trainingthechurch.com/knowingfaith), [Culture Matters](https://culturematterspodcast.podbean.com/), [Ask Pastor John](https://www.desiringgod.org/ask-pastor-john), [Cultish](https://thecultishshow.com/), [The Mikhaila Peterson Podcast](https://mikhailapeterson.com/podcast/),[Pray the Word & Radical with David Platt](https://radical.net/podcasts/)), and [Luther: In Real Time](https://www.ligonier.org/luther-in-real-time/))
+- Primarily Christian Podcasts ([Knowing Faith](https://www.trainingthechurch.com/knowingfaith), [Culture Matters](https://culturematterspodcast.podbean.com/), [Ask Pastor John](https://www.desiringgod.org/ask-pastor-john), [Cultish](https://thecultishshow.com/), [The Mikhaila Peterson Podcast](https://mikhailapeterson.com/podcast/), [Pray the Word & Radical with David Platt](https://radical.net/podcasts/), and [Luther: In Real Time](https://www.ligonier.org/luther-in-real-time/))
 
 # Travel / Geography
 
