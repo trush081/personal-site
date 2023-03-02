@@ -22,7 +22,7 @@ const SideBar = () => (
       <h2>About</h2>
       <p><Greetings />
         I am a <a href="https://www.uky.edu/">University of Kentucky</a> graduate in the College of Engineering, and
-        currently employed by <a href="https://www.brooksource.com/">Brooksource</a> as a Consultant for <a href="https://www.papajohns.com">Papa Johns International</a>.
+        currently employed by <a href="https://www.papajohns.com">Papa Johns International</a>.
       </p>
       <ul className="actions">
         <li>

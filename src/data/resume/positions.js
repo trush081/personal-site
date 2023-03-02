@@ -1,9 +1,21 @@
 const positions = [
   {
     company: 'Papa Johns',
-    position: 'Consultant (Consulting Company: Brooksource)',
+    position: 'Engineer',
     link: 'https://www.papajohns.com/',
-    daterange: 'January 2022 - Present',
+    daterange: 'January 2023 - Present',
+    points: [
+      'Worked in an Agile development environemnt while also continuing to improve development processes',
+      'Designed and coded scalable software solutions using Spring Boot and Google Cloud Platform',
+      'Maintained product quality through unit and functionality tests (this could also be expanded to basic QA testing)',
+      'Helped to guide and work with my other team members and product team to design and create solutions',
+    ],
+  },
+  {
+    company: 'Brooksource',
+    position: 'Consultant for Papa Johns',
+    link: 'https://www.brooksource.com/',
+    daterange: 'January 2022 - January 2023',
     points: [
       'Worked in an Agile development environemnt while also continuing to improve development processes',
       'Designed and coded scalable software solutions using Spring Boot and Google Cloud Platform',
