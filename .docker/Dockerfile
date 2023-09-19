@@ -2,10 +2,10 @@
 FROM node:17-alpine as builder
 WORKDIR /app
 COPY package.json .
-COPY yarn.lock .
-RUN yarn install
+COPY package-lock.json .
+RUN npm run install
 COPY . .
-RUN yarn build
+RUN npm run build
 
 #Stage 2
 FROM nginx:1.19.0
