@@ -1,10 +1,9 @@
 #Stage 1
 FROM node:17-alpine as builder
 WORKDIR /app
-COPY package.json .
-COPY package-lock.json .
-RUN npm run install
-COPY . .
+COPY package*.json /app/
+RUN npm install
+COPY ./ /app/
 RUN npm run build
 
 #Stage 2
