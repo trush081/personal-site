@@ -1,15 +1,15 @@
-FROM node:12.16.3-alpine as build
-
+#Stage 1
+FROM node:17-alpine as builder
 WORKDIR /app
+COPY package.json .
+COPY yarn.lock .
+RUN yarn install
+COPY . .
+RUN yarn build
 
-COPY . ./
-
-# ---
-FROM fholzer/nginx-brotli:v1.12.2
-
-WORKDIR /etc/nginx
-ADD nginx.conf /etc/nginx/nginx.conf
-
-COPY --from=build /app/build /usr/share/nginx/html
-EXPOSE 8080
-CMD ["nginx", "-g", "daemon off;"]
+#Stage 2
+FROM nginx:1.19.0
+WORKDIR /usr/share/nginx/html
+RUN rm -rf ./*
+COPY --from=builder /app/build .
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
