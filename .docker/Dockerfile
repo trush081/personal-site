@@ -1,6 +1,6 @@
 FROM node:18.12.1-buster-slim AS builder
 
-WORKDIR /app
+WORKDIR /
 COPY package.json package-lock.json ./
 COPY ./ ./
 RUN npm ci
