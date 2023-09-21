@@ -4,7 +4,7 @@ RUN mkdir /usr/app
 WORKDIR /usr/app
 COPY . /usr/app
 RUN yarn
-ENV /usr/src/app/node/modules/.bin:$PATH
+ENV PATH /usr/src/app/node/modules/.bin:$PATH
 RUN npm run build
 
 FROM nginx:alpine
