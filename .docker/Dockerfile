@@ -2,8 +2,8 @@ FROM node:18.12.1-buster-slim AS builder
 
 WORKDIR /app
 COPY **/package.json **/package-lock.json ./
-COPY . .
 RUN npm install
+COPY . .
 RUN npm run build
 
 FROM nginx:1.23.2-alpine

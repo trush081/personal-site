@@ -1,11 +1,14 @@
 version: "3.8"
 
 services:
-  app:
-    container_name: personal-site
-    image: docker-react-i
-    user: "1000:1000"
+  react-nginx-app:
+    stdin_open: true
     build:
       context: .
+      dockerfile: Dockerfile
+    expose:
+      - 8080
     ports:
-      - 8080:8080
+      - 8080:80
+    environment:
+      - CHOKIDAR_USEPOLLING=true
