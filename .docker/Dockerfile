@@ -1,4 +1,4 @@
-FROM node:18.12.1-buster-slim AS builder
+FROM node:16.15.1 AS builder
 
 RUN mkdir /usr/app
 WORKDIR /usr/app
