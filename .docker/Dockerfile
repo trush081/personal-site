@@ -2,9 +2,9 @@ FROM node:14.21.3 AS builder
 
 RUN mkdir /usr/app
 WORKDIR /usr/app
-COPY . /usr/app
-RUN npm install
-ENV NODE_ENV=production
+COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
+RUN npm install --production && mv node_modules ../
+COPY . .
 RUN npm run build
 
 FROM nginx:alpine
