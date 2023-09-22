@@ -4,7 +4,7 @@ RUN mkdir /usr/app
 WORKDIR /usr/app
 COPY ["package.json", "package-lock.json*", "./"]
 RUN npm install
-ENV NODE_ENV=production
+ENV NODE_ENV=development
 ENV PATH /usr/src/app/node/modules/.bin:$PATH
 RUN npm run build
 
