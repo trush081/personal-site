@@ -1,4 +1,4 @@
-FROM node:12.16.3-alpine AS builder
+FROM node:14.21.3 AS builder
 
 RUN mkdir /usr/app
 WORKDIR /usr/app
