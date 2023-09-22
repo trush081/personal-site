@@ -1,7 +1,9 @@
 FROM node:14 AS build
 WORKDIR /app
 COPY package*.json ./
-RUN npm install && npm run predeploy
+RUN npm install
+COPY . .
+RUN npm run predeploy
 
 FROM nginx:latest
 COPY --from=build /app/build /usr/share/nginx/html
