@@ -2,6 +2,7 @@ FROM node:14.21.3 AS build
 WORKDIR /app
 COPY . .
 RUN npm install
+COPY . .
 RUN npm run predeploy
 
 FROM nginx:stable-alpine
