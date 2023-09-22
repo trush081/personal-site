@@ -4,6 +4,7 @@ RUN mkdir /usr/app
 WORKDIR /usr/app
 COPY . /usr/app
 RUN npm install
+ENV NODE_ENV=production
 ENV PATH /usr/src/app/node/modules/.bin:$PATH
 RUN npm run build
 
