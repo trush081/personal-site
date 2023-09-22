@@ -3,7 +3,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm build
+RUN npm run predeploy
 
 FROM nginx:latest
 COPY --from=build /app/build /usr/share/nginx/html
