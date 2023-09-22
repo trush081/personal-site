@@ -2,13 +2,8 @@ version: "3.8"
 
 services:
   react-nginx-app:
-    stdin_open: true
+    user: "1000:1000"
     build:
       context: .
-      dockerfile: Dockerfile
-    expose:
-      - 8080
     ports:
       - 8080:80
-    environment:
-      - CHOKIDAR_USEPOLLING=true
