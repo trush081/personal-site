@@ -4,5 +4,6 @@ services:
   react-nginx-app:
     build:
       context: .
+    pull_policy: build
     ports:
       - 8080:80
