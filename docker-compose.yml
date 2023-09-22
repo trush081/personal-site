@@ -2,7 +2,6 @@ version: "3.8"
 
 services:
   react-nginx-app:
-    user: "1000:1000"
     build:
       context: .
     ports:
