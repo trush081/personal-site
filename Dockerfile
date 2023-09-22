@@ -1,7 +1,7 @@
 FROM node:14.21.3 AS build
 WORKDIR /app
 COPY . .
-RUN yarn
+RUN yarn install --production --ignore-engines
 RUN yarn build
 
 FROM nginx:stable-alpine
