@@ -2,10 +2,9 @@ FROM node:14.21.3 AS builder
 
 RUN mkdir /usr/app
 WORKDIR /usr/app
-COPY ["package.json", "package-lock.json*", "./"]
-RUN npm install --production
-ENV PATH /usr/src/app/node/modules/.bin:$PATH
-RUN npm run build
+COPY . .
+RUN yarn
+RUN yarn build
 
 FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
