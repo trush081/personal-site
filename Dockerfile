@@ -5,8 +5,8 @@ RUN npm install
 COPY . .
 RUN npm run predeploy
 
-FROM fholzer/nginx-brotli:latest
+FROM nginx:latest
 COPY --from=build /app/build /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 EXPOSE 80
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off;"]
