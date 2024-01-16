@@ -12,9 +12,9 @@ const data = [
     title: 'Granite Solutions',
     subtitle: 'Fake E-commerce Website',
     link: 'https://granite-solutions.trentonrush.com',
-    image: '/images/Memorial-Hall-tint.jpg',
+    image: '/images/Granite-Counter.webp',
     date: '2024-1-2',
-    desc: 'A mock e-commerce website to practice my coding skills and challenge myself to learn in some of the areas that I am most interested in but do not have the opportunity to at work. This is very much a work in progress, so do not critique too much.',
+    desc: 'A mock e-commerce website to practice my coding skills and challenge myself to learn in some of the areas that I am most interested in but do not have the opportunity too at work. This is very much a work in progress, so do not critique too much.',
   },
 ];
 
