@@ -59,7 +59,7 @@ const skills = [
   },
   {
     title: 'Firebase',
-    competency: 4,
+    competency: 3,
     category: ['Database'],
   },
   {
@@ -93,13 +93,23 @@ const skills = [
     category: ['Methodologies and Tools'],
   },
   {
+    title: 'Jenkins',
+    competency: 3,
+    category: ['Methodologies and Tools'],
+  },
+  {
+    title: 'Terraform',
+    competency: 4,
+    category: ['Methodologies and Tools', 'Languages'],
+  },
+  {
     title: 'React JS',
     competency: 2,
     category: ['Frameworks', 'Web Development'],
   },
   {
     title: 'Angular',
-    competency: 1,
+    competency: 2,
     category: ['Frameworks', 'Web Development'],
   },
 ].map((skill) => ({ ...skill, category: skill.category.sort() }));

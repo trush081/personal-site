@@ -34,7 +34,7 @@ const data = [
   {
     key: 'location',
     label: 'Current city',
-    value: 'Plano, TX',
+    value: 'Richardson, TX',
   },
   {
     key: 'boulders',
