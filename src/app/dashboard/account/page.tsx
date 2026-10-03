@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 
 import PasswordForm from '@/components/Dashboard/PasswordForm';
 import { signOut } from '@/lib/actions/auth';
@@ -17,6 +18,10 @@ const Account = async () => {
           <p>{auth.email} &middot; {auth.status}</p>
         </div>
       </header>
+
+      {auth.status === 'owner' && (
+        <p><Link href="/dashboard/account/users">Manage users &rarr;</Link></p>
+      )}
 
       <h3>Change password</h3>
       <PasswordForm />

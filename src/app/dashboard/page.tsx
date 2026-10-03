@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import dayjs from 'dayjs';
 
-import { requireRole } from '@/lib/auth';
+import { hasRole, requireRole } from '@/lib/auth';
 import { navFor } from '@/lib/dashboard-nav';
 import { getSection } from '@/lib/sections';
 import createClient from '@/lib/supabase/server';
@@ -11,7 +11,7 @@ const Overview = async () => {
   const tools = navFor(auth).filter((item) => item.href !== '/dashboard');
 
   let recent: { key: string; updated_at: string }[] = [];
-  if (auth.status === 'admin') {
+  if (hasRole(auth, 'admin')) {
     const supabase = await createClient();
     const { data } = await supabase
       .from('site_content')

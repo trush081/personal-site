@@ -2,7 +2,7 @@
 
 import { revalidatePath, updateTag } from 'next/cache';
 
-import { getAuthState } from '@/lib/auth';
+import { getAuthState, hasRole } from '@/lib/auth';
 import { CONTENT_TAG } from '@/lib/content';
 import { getSection, sanitizeSection } from '@/lib/sections';
 import createClient from '@/lib/supabase/server';
@@ -12,7 +12,7 @@ export const saveSection = async (key: string, data: unknown): Promise<ActionRes
   // Re-verify on every call: server actions are public endpoints, and the proxy
   // only checks that someone is signed in, not that they are an admin.
   const auth = await getAuthState();
-  if (auth.status !== 'admin') return { ok: false, error: 'Not authorized.' };
+  if (auth.status === 'signed-out' || !hasRole(auth, 'admin')) return { ok: false, error: 'Not authorized.' };
 
   const section = getSection(key);
   if (!section) return { ok: false, error: 'Unknown section.' };

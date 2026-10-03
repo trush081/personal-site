@@ -243,3 +243,19 @@
 		position: static;
 	}
 }
+
+.dashboard-help {
+	color: _palette(fg-light);
+	font-size: 0.9em;
+}
+
+.dashboard-users {
+	select {
+		height: 2.25em;
+		min-width: 7em;
+	}
+
+	td {
+		vertical-align: middle;
+	}
+}
