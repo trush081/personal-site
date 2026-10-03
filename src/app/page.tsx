@@ -27,7 +27,7 @@ const Index = () => (
         view <Link href="/stats">personal statistics</Link>, {' '}
         or <Link href="/contact">contact</Link> me.
       </p>
-      <p> I am definitly no expert in front-end development, so I must give credit to the original developer <a href="https://github.com/mldangelo/personal-site">here</a>. However, I have put my own spin on things.</p>
+      <p> I am definitely no expert in front-end development, so I must give credit to the original developer <a href="https://github.com/mldangelo/personal-site">here</a>. However, I have put my own spin on things.</p>
     </article>
   </Main>
 );

@@ -19,7 +19,7 @@ At Papa Johns International, I've been able to have an amazing first experience 
 
 - When I was 17 I took my first coding class, never knew that learning Java would still be my primary focus even after college, but that class gave me a huge advantage when I started to take Computer Science(CS) courses.
 
-- From 18 to 22, earned my CS degree at the University of Kentucky and also learned of my passion for coffee. During this time, I made my first website in HTML/CSS/Javascript for a ministry I was involved with, [UKPray](https://www.ukpray.com). (Assuming this is still up, it looks best on Chrome)
+- From 18 to 22, earned my CS degree at the University of Kentucky and also learned of my passion for coffee. During this time, I made my first website in HTML/CSS/Javascript for a ministry I was involved with, UKPray.
 
 - Age 21, completed my capstone project for Papa Johns International. I made a driver delivery app that inspired a modern-day application and was offered to work with them as a contractor.
 
@@ -46,4 +46,4 @@ At Papa Johns International, I've been able to have an amazing first experience 
 - I am currently playing Lego Star Wars and Farcry 6.
 - I have way too many hobbies that I am trying to learn including piano, chess, Arduino
 - I am always reading more books than I should at one time.
-- I currently projecting boulders graded v7-v8 at my gym.
+- I am currently projecting boulders graded v7-v8 at my gym.

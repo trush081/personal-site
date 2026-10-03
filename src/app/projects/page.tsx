@@ -16,15 +16,15 @@ const Projects = () => (
       <header>
         <div className="title">
           <h2><Link href="/projects">Projects</Link></h2>
-          <p>Some random Applications and Projects that i&apos;ve worked on</p>
+          <p>Some random Applications and Projects that I&apos;ve worked on</p>
         </div>
       </header>
-      {data.map((project) => (
+      {data.length ? data.map((project) => (
         <Cell
           data={project}
           key={project.title}
         />
-      ))}
+      )) : <p>New projects are on the way. Check back soon!</p>}
     </article>
   </Main>
 );

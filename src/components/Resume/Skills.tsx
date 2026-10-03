@@ -38,7 +38,7 @@ const Skills = ({ skills = [], categories = [] }: SkillsProps) => {
       <div className="link-to" id="skills" />
       <div className="title">
         <h3>Skills</h3>
-        <p>Note: These skill are based on my most familiar(5) to least(1).
+        <p>Note: These skills are based on my most familiar(5) to least(1).
           I try to add anything I have possibly used for at least a month.
         </p>
       </div>
