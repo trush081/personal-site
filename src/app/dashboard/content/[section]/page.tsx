@@ -1,10 +1,9 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
-import Link from 'next/link';
-import { notFound, redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 
-import SectionEditor from '@/components/Admin/SectionEditor';
-import { getAuthState } from '@/lib/auth';
+import SectionEditor from '@/components/Dashboard/SectionEditor';
+import { requireRole } from '@/lib/auth';
 import { getContent } from '@/lib/content';
 import { getSection } from '@/lib/sections';
 import contact from '@/data/contact';
@@ -27,12 +26,15 @@ const defaults: Record<string, unknown> = {
   stats,
 };
 
+export const generateMetadata = async ({ params }: { params: Promise<{ section: string }> }) => {
+  const { section } = await params;
+  return { title: getSection(section)?.title ?? 'Site content' };
+};
+
 const EditSection = async ({ params }: { params: Promise<{ section: string }> }) => {
   const { section: key } = await params;
 
-  const auth = await getAuthState();
-  if (auth.status === 'signed-out') redirect('/admin/login');
-  if (auth.status !== 'admin') redirect('/admin');
+  await requireRole('admin');
 
   const section = getSection(key);
   if (!section) notFound();
@@ -47,7 +49,6 @@ const EditSection = async ({ params }: { params: Promise<{ section: string }> })
           <p>{section.description}</p>
         </div>
       </header>
-      <p><Link href="/admin">&larr; All sections</Link></p>
       <SectionEditor section={section} initial={initial} />
     </>
   );

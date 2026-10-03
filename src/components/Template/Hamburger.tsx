@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 
+import AccountLink from './AccountLink';
 import routes from '@/data/routes';
 
 const Hamburger = () => {
@@ -35,6 +36,9 @@ const Hamburger = () => {
                   </Link>
                 </li>
               ))}
+              <li>
+                <AccountLink onClick={() => setOpen(false)} render={(label) => <h3>{label}</h3>} />
+              </li>
             </ul>
           </nav>
         </div>

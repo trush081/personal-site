@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from 'react';
 
-import { saveSection } from '@/app/admin/actions';
+import { saveSection } from '@/lib/actions/content';
 import createClient from '@/lib/supabase/client';
 import type { Field, Section } from '@/lib/sections';
 
@@ -50,7 +50,7 @@ const ImageInput = ({ value, onChange }: { value: string; onChange: (url: string
   };
 
   return (
-    <div className="admin-image">
+    <div className="dashboard-image">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       {value && <img src={value} alt="" />}
       <input type="file" accept="image/*" onChange={(e) => e.target.files?.[0] && upload(e.target.files[0])} />
@@ -118,20 +118,20 @@ const SectionEditor = ({ section, initial }: { section: Section; initial: unknow
   };
 
   return (
-    <div className="admin-editor">
+    <div className="dashboard-editor">
       {items.map((item, index) => (
-        <fieldset key={index} className="admin-item">
+        <fieldset key={index} className="dashboard-item">
           {isList && (
             <legend>{item[section.itemLabel ?? ''] || `New ${section.title.toLowerCase()} item`}</legend>
           )}
           {section.fields.map((field) => (
-            <div key={field.name} className="admin-field">
+            <div key={field.name} className="dashboard-field">
               <label htmlFor={`${field.name}-${field.label}`}>{field.label}{field.required ? ' *' : ''}</label>
               <FieldInput field={field} value={item[field.name]} onChange={(v) => update(index, field.name, v)} />
             </div>
           ))}
           {isList && (
-            <div className="admin-item-actions">
+            <div className="dashboard-item-actions">
               <button type="button" onClick={() => move(index, -1)} disabled={index === 0}>Move up</button>
               <button type="button" onClick={() => move(index, 1)} disabled={index === items.length - 1}>Move down</button>
               <button type="button" onClick={() => remove(index)}>Remove</button>
@@ -147,9 +147,9 @@ const SectionEditor = ({ section, initial }: { section: Section; initial: unknow
         </button>
       )}
 
-      <div className="admin-save">
+      <div className="dashboard-save">
         <button type="button" onClick={save} disabled={pending}>{pending ? 'Saving…' : 'Save changes'}</button>
-        {message && <span className={message.ok ? 'admin-ok' : 'admin-error'} role="status">{message.text}</span>}
+        {message && <span className={message.ok ? 'dashboard-ok' : 'dashboard-error'} role="status">{message.text}</span>}
       </div>
     </div>
   );

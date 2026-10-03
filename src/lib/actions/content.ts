@@ -1,36 +1,12 @@
 'use server';
 
 import { revalidatePath, updateTag } from 'next/cache';
-import { redirect } from 'next/navigation';
 
 import { getAuthState } from '@/lib/auth';
 import { CONTENT_TAG } from '@/lib/content';
 import { getSection, sanitizeSection } from '@/lib/sections';
 import createClient from '@/lib/supabase/server';
-
-export interface ActionResult {
-  ok: boolean;
-  error?: string;
-}
-
-export const signIn = async (_prev: ActionResult | undefined, formData: FormData): Promise<ActionResult> => {
-  const email = String(formData.get('email') ?? '').trim();
-  const password = String(formData.get('password') ?? '');
-  if (!email || !password) return { ok: false, error: 'Enter your email and password.' };
-
-  const supabase = await createClient();
-  const { error } = await supabase.auth.signInWithPassword({ email, password });
-  // Same message for every failure so the form doesn't reveal which emails exist.
-  if (error) return { ok: false, error: 'Invalid email or password.' };
-
-  redirect('/admin');
-};
-
-export const signOut = async () => {
-  const supabase = await createClient();
-  await supabase.auth.signOut();
-  redirect('/admin/login');
-};
+import type { ActionResult } from './auth';
 
 export const saveSection = async (key: string, data: unknown): Promise<ActionResult> => {
   // Re-verify on every call: server actions are public endpoints, and the proxy

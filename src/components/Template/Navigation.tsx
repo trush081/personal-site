@@ -1,5 +1,6 @@
 import Link from 'next/link';
 
+import AccountLink from './AccountLink';
 import Hamburger from './Hamburger';
 import routes from '@/data/routes';
 
@@ -19,6 +20,9 @@ const Navigation = () => (
           </li>
         ))}
       </ul>
+    </nav>
+    <nav className="account-link">
+      <AccountLink />
     </nav>
     <Hamburger />
   </header>

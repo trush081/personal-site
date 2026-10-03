@@ -2,8 +2,8 @@ import { NextResponse, type NextRequest } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
 
 // Optimistic check only: refreshes the Supabase session cookie and sends signed-out
-// visitors to the login page. Real authorization (the admin role) is enforced in
-// each admin page and server action via getAuthState().
+// visitors to the login page. Real authorization (roles) is enforced in each
+// dashboard page and server action via requireRole()/getAuthState().
 export const proxy = async (request: NextRequest) => {
   let response = NextResponse.next({ request });
 
@@ -24,12 +24,14 @@ export const proxy = async (request: NextRequest) => {
 
   const { data: { user } } = await supabase.auth.getUser();
 
-  if (!user && request.nextUrl.pathname !== '/admin/login') {
-    return NextResponse.redirect(new URL('/admin/login', request.url));
+  if (!user && request.nextUrl.pathname.startsWith('/dashboard')) {
+    const login = new URL('/login', request.url);
+    login.searchParams.set('next', request.nextUrl.pathname);
+    return NextResponse.redirect(login);
   }
   return response;
 };
 
 export const config = {
-  matcher: ['/admin', '/admin/:path*'],
+  matcher: ['/dashboard', '/dashboard/:path*', '/login'],
 };

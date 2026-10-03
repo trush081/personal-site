@@ -233,3 +233,26 @@
 		display: initial;
 	}
 }
+
+#header .account-link {
+	border-left: solid 1px _palette(border);
+	height: inherit;
+	line-height: inherit;
+	padding: 0 1.5em;
+
+	a {
+		border-bottom: 0;
+		font-family: _font(family-heading);
+		font-size: 0.7em;
+		font-weight: _font(weight-heading);
+		letter-spacing: _font(kerning-heading);
+		text-transform: uppercase;
+	}
+}
+
+// On smaller screens the account link lives in the hamburger menu instead.
+@include breakpoint(medium) {
+	#header .account-link {
+		display: none;
+	}
+}
