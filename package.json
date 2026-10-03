@@ -8,7 +8,7 @@
     "url": "https://github.com/trush081/personal-site.git"
   },
   "engines": {
-    "node": ">=20.9"
+    "node": ">=22"
   },
   "scripts": {
     "dev": "next dev",

@@ -20,7 +20,7 @@ Most updates only touch `src/data/`: `about.md` for the About page, `resume/` fo
 
 ## Development
 
-Requires [node](https://nodejs.org/) >= 20.9 (`nvm use` picks up `.nvmrc`).
+Requires [node](https://nodejs.org/) >= 22; 24 is recommended (`nvm use` picks up `.nvmrc`).
 
 ```bash
 npm install
