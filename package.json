@@ -23,6 +23,8 @@
     "@fortawesome/free-regular-svg-icons": "^7.3.1",
     "@fortawesome/react-fontawesome": "^3.5.0",
     "@next/third-parties": "^16.3.8",
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.117.2",
     "dayjs": "^1.11.23",
     "next": "^16.3.8",
     "normalize.css": "^8.0.1",

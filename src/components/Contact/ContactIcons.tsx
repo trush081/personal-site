@@ -1,17 +1,23 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import data from '@/data/contact';
+import icons from './icons';
+import { getContent } from '@/lib/content';
+import fallback from '@/data/contact';
 
-const ContactIcons = () => (
-  <ul className="icons">
-    {data.map((s) => (
-      <li key={s.label}>
-        <a href={s.link} aria-label={s.label}>
-          <FontAwesomeIcon icon={s.icon} />
-        </a>
-      </li>
-    ))}
-  </ul>
-);
+const ContactIcons = async () => {
+  const data = await getContent('contact', fallback);
+
+  return (
+    <ul className="icons">
+      {data.filter((s) => icons[s.icon]).map((s) => (
+        <li key={s.label}>
+          <a href={s.link} aria-label={s.label}>
+            <FontAwesomeIcon icon={icons[s.icon]} />
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+};
 
 export default ContactIcons;

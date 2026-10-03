@@ -1,0 +1,93 @@
+// Admin area (/admin)
+
+#admin {
+	.admin-form {
+		max-width: 24em;
+
+		> div {
+			margin-bottom: 1.5em;
+		}
+	}
+
+	.admin-sections {
+		list-style: none;
+		padding: 0;
+
+		li {
+			padding: 0;
+			margin-bottom: 1.5em;
+		}
+
+		h3,
+		p {
+			margin: 0;
+		}
+	}
+
+	.admin-signed-in {
+		margin-top: 2em;
+	}
+
+	.admin-item {
+		border: solid 1px _palette(border);
+		border-radius: 3px;
+		margin: 0 0 2em 0;
+		padding: 1.5em;
+
+		legend {
+			padding: 0 0.5em;
+			font-family: _font(family-heading);
+			font-size: 0.8em;
+			letter-spacing: _font(kerning-heading);
+			text-transform: uppercase;
+		}
+	}
+
+	.admin-field {
+		margin-bottom: 1.25em;
+
+		label {
+			display: block;
+			margin-bottom: 0.5em;
+		}
+
+		textarea {
+			width: 100%;
+		}
+	}
+
+	.admin-item-actions button {
+		margin-right: 0.75em;
+	}
+
+	.admin-image {
+		img {
+			display: block;
+			max-width: 12em;
+			margin-bottom: 0.75em;
+		}
+
+		input {
+			margin-bottom: 0.5em;
+		}
+	}
+
+	.admin-save {
+		position: sticky;
+		bottom: 0;
+		padding: 1em 0;
+		background: _palette(bg);
+
+		span {
+			margin-left: 1em;
+		}
+	}
+
+	.admin-ok {
+		color: _palette(accent);
+	}
+
+	.admin-error {
+		color: #ff8a8a;
+	}
+}

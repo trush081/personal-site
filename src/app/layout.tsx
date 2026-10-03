@@ -25,6 +25,10 @@ const raleway = Raleway({
 
 const { NEXT_PUBLIC_GA_ID } = process.env;
 
+// Pages are static; refresh them periodically so edits made directly in the
+// database show up even without the admin area's on-demand revalidation.
+export const revalidate = 300;
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.trentonrush.com'),
   title: {

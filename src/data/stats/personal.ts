@@ -1,27 +1,24 @@
-import type { ReactNode } from 'react';
-
-import Age from '@/components/Stats/Age';
-
 export interface Stat {
   key: string;
   label: string;
-  value: ReactNode;
+  value: string;
   link?: string;
-  format?: (value: ReactNode) => ReactNode;
+  // 'age' renders a live-ticking age computed from the birth time, ignoring `value`
+  kind?: 'text' | 'age';
 }
 
 const data: Stat[] = [
   {
     key: 'age',
     label: 'Current age',
-    value: <Age />,
+    value: '',
+    kind: 'age',
   },
   {
     key: 'countries',
     label: 'Countries visited',
-    value: 2,
-    link:
-      '', // TODO Put Map to reference
+    value: '2',
+    link: '', // TODO Put Map to reference
   },
   {
     key: 'location',
@@ -31,7 +28,7 @@ const data: Stat[] = [
   {
     key: 'boulders',
     label: 'Boulders climbed this year',
-    value: 215,
+    value: '215',
   },
 ];
 

@@ -138,13 +138,15 @@ const colors = [
   '#70016f',
 ];
 
-const categories: Category[] = [
-  ...new Set(skills.flatMap(({ category }) => category)),
+// Derives the category list (and each category's color) from the skills themselves,
+// so categories added in the CMS get a color automatically.
+const buildCategories = (list: Skill[]): Category[] => [
+  ...new Set(list.flatMap(({ category }) => category)),
 ]
   .sort()
   .map((category, index) => ({
     name: category,
-    color: colors[index],
+    color: colors[index % colors.length],
   }));
 
-export { categories, skills };
+export { buildCategories, skills };
