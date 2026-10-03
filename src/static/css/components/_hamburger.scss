@@ -38,3 +38,51 @@
     border-top: none;
   }
 }
+
+// Slide-out menu (replaces the inline styles previously injected by react-burger-menu)
+
+.bm-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  background: transparent; // click-outside-to-close target only, no dimming
+  opacity: 0;
+  transform: translate3d(100%, 0, 0);
+  transition: opacity 0.3s, transform 0s 0.3s;
+
+  &.is-open {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.3s;
+  }
+}
+
+.bm-menu-wrap {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1100;
+  width: 300px;
+  height: 100%;
+  transform: translate3d(100%, 0, 0);
+  transition: transform _duration(menu), visibility _duration(menu);
+  visibility: hidden;
+
+  &.is-open {
+    transform: none;
+    visibility: visible;
+  }
+
+  .bm-menu {
+    height: 100%;
+    box-sizing: border-box;
+    overflow: auto;
+  }
+
+  .bm-item-list {
+    height: 100%;
+  }
+}

@@ -24,3 +24,7 @@
 			}
 		}
 	}
+// FontAwesome v7 makes icons fixed-width by default; keep the natural widths.
+.svg-inline--fa {
+	--fa-width: auto;
+}

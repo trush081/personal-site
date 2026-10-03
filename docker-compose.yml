@@ -1,9 +1,0 @@
-version: "3.8"
-
-services:
-  react-nginx-app:
-    container_name: personal-site
-    build:
-      context: .
-    ports:
-      - 8080:80
