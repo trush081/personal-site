@@ -1,8 +1,9 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, updateTag } from 'next/cache';
 
 import { getAuthState } from '@/lib/auth';
+import { PUBLIC_APPS_TAG } from '@/lib/content';
 import createClient from '@/lib/supabase/server';
 import type { ActionResult } from './auth';
 
@@ -10,7 +11,12 @@ import type { ActionResult } from './auth';
 // Row-level security enforces the same rule again in the database.
 const requireOwner = async () => (await getAuthState()).status === 'owner';
 
-const refresh = () => revalidatePath('/dashboard', 'layout');
+// Refresh the dashboard and the public Projects page (which lists public apps).
+const refresh = () => {
+  updateTag(PUBLIC_APPS_TAG);
+  revalidatePath('/dashboard', 'layout');
+  revalidatePath('/projects');
+};
 
 const KINDS = ['internal', 'shared', 'external'];
 const VISIBILITIES = ['public', 'members', 'restricted'];

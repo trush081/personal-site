@@ -2,8 +2,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 import Main from '@/components/Template/Main';
+import AppCell from '@/components/Projects/AppCell';
 import Cell from '@/components/Projects/Cell';
-import { getContent } from '@/lib/content';
+import { getContent, getPublicApps } from '@/lib/content';
 import fallback from '@/data/projects';
 
 export const metadata: Metadata = {
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 const Projects = async () => {
-  const data = await getContent('projects', fallback);
+  const [data, apps] = await Promise.all([getContent('projects', fallback), getPublicApps()]);
 
   return (
     <Main>
@@ -23,12 +24,14 @@ const Projects = async () => {
             <p>Some random Applications and Projects that I&apos;ve worked on</p>
           </div>
         </header>
-        {data.length ? data.map((project) => (
+        {data.map((project) => (
           <Cell
             data={project}
             key={project.title}
           />
-        )) : <p>New projects are on the way. Check back soon!</p>}
+        ))}
+        {apps.map((app) => <AppCell app={app} key={app.slug} />)}
+        {data.length === 0 && apps.length === 0 && <p>New projects are on the way. Check back soon!</p>}
       </article>
     </Main>
   );
