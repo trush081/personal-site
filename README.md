@@ -32,6 +32,10 @@ npm run build
 
 To enable Google Analytics, copy `sample.env` to `.env.local` and set `NEXT_PUBLIC_GA_ID`. In production, set it as an environment variable in the Vercel project.
 
+## Shared sign-in
+
+Your own projects on `trentonrush.com` subdomains can use this site's accounts and access rules. See [docs/shared-sign-in.md](./docs/shared-sign-in.md).
+
 ## Deploying
 
 Vercel deploys `main` automatically on every push, and builds a preview deployment for every other branch and pull request.

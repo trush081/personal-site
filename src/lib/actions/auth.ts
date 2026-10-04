@@ -2,6 +2,7 @@
 
 import { redirect } from 'next/navigation';
 
+import { safeRedirect } from '@/lib/supabase/cookies';
 import createClient from '@/lib/supabase/server';
 
 export interface ActionResult {
@@ -9,12 +10,6 @@ export interface ActionResult {
   error?: string;
   message?: string;
 }
-
-// Only allow redirects back into the dashboard, never to other sites.
-const safeNext = (value: FormDataEntryValue | null) => {
-  const next = typeof value === 'string' ? value : '';
-  return next.startsWith('/dashboard') ? next : '/dashboard';
-};
 
 export const signIn = async (_prev: ActionResult | undefined, formData: FormData): Promise<ActionResult> => {
   const email = String(formData.get('email') ?? '').trim();
@@ -26,7 +21,7 @@ export const signIn = async (_prev: ActionResult | undefined, formData: FormData
   // Same message for every failure so the form doesn't reveal which emails exist.
   if (error) return { ok: false, error: 'Invalid email or password.' };
 
-  redirect(safeNext(formData.get('next')));
+  redirect(safeRedirect(formData.get('next')));
 };
 
 export const signOut = async () => {
