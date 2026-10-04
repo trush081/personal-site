@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import dayjs from 'dayjs';
 
+import AppCard from '@/components/Dashboard/AppCard';
+import { getMyApps } from '@/lib/apps';
 import { hasRole, requireRole } from '@/lib/auth';
 import { navFor } from '@/lib/dashboard-nav';
 import { getSection } from '@/lib/sections';
@@ -8,6 +10,7 @@ import createClient from '@/lib/supabase/server';
 
 const Overview = async () => {
   const auth = await requireRole('user');
+  const apps = await getMyApps();
   const tools = navFor(auth).filter((item) => item.href !== '/dashboard');
 
   let recent: { key: string; updated_at: string }[] = [];
@@ -30,6 +33,16 @@ const Overview = async () => {
         </div>
       </header>
 
+      {apps.length > 0 && (
+        <>
+          <h3>Your apps</h3>
+          <div className="dashboard-cards">
+            {apps.map((app) => <AppCard key={app.id} app={app} />)}
+          </div>
+        </>
+      )}
+
+      <h3>Tools</h3>
       <div className="dashboard-cards">
         {tools.map((tool) => (
           <Link key={tool.href} href={tool.href} className="dashboard-card">

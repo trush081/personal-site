@@ -20,7 +20,7 @@ const Account = async () => {
       </header>
 
       {auth.status === 'owner' && (
-        <p><Link href="/dashboard/account/users">Manage users &rarr;</Link></p>
+        <p><Link href="/dashboard/manage/users">Manage users &rarr;</Link></p>
       )}
 
       <h3>Change password</h3>

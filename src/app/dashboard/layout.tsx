@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 
 import SideMenu from '@/components/Dashboard/SideMenu';
 import { requireRole } from '@/lib/auth';
+import { getMyApps } from '@/lib/apps';
 import { navFor } from '@/lib/dashboard-nav';
 
 export const metadata: Metadata = {
@@ -16,10 +17,11 @@ export const metadata: Metadata = {
 // Signed-in area: just the side menu and content, without the public site's header.
 const DashboardLayout = async ({ children }: { children: ReactNode }) => {
   const auth = await requireRole('user');
+  const apps = await getMyApps();
 
   return (
     <div className="dashboard-shell">
-      <SideMenu items={navFor(auth)} email={auth.email} role={auth.status} />
+      <SideMenu items={navFor(auth, apps)} email={auth.email} role={auth.status} />
       <main className="dashboard-main">
         <article className="post dashboard-content">
           {children}

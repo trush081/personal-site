@@ -7,7 +7,7 @@ import createAdminClient, { isAdminApiConfigured } from '@/lib/supabase/admin';
 import createClient from '@/lib/supabase/server';
 import type { ActionResult } from './auth';
 
-const USERS_PATH = '/dashboard/account/users';
+const USERS_PATH = '/dashboard/manage/users';
 const MIN_PASSWORD = 10;
 const ASSIGNABLE = ['user', 'admin'] as const;
 type AssignableRole = typeof ASSIGNABLE[number];
