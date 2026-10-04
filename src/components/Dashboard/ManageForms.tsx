@@ -26,12 +26,12 @@ export const AppForm = ({ app }: { app?: App }) => {
       {app && <input type="hidden" name="id" value={app.id} />}
       <div>
         <label htmlFor="app-name">Name
-          <input id="app-name" name="name" defaultValue={app?.name} required maxLength={100} />
+          <input id="app-name" type="text" name="name" defaultValue={app?.name} required maxLength={100} />
         </label>
       </div>
       <div>
         <label htmlFor="app-slug">Slug (used in links and by other projects)
-          <input id="app-slug" name="slug" defaultValue={app?.slug} required pattern="[a-z0-9]+(-[a-z0-9]+)*" maxLength={60} placeholder="my-app" />
+          <input id="app-slug" type="text" name="slug" defaultValue={app?.slug} required pattern="[a-z0-9]+(-[a-z0-9]+)*" maxLength={60} placeholder="my-app" />
         </label>
       </div>
       <div>
@@ -125,12 +125,12 @@ export const GroupForm = ({ group }: { group?: { id: string; name: string; descr
       {group && <input type="hidden" name="id" value={group.id} />}
       <div>
         <label htmlFor="group-name">Name
-          <input id="group-name" name="name" defaultValue={group?.name} required maxLength={60} />
+          <input id="group-name" type="text" name="name" defaultValue={group?.name} required maxLength={60} />
         </label>
       </div>
       <div>
         <label htmlFor="group-description">Description
-          <input id="group-description" name="description" defaultValue={group?.description} maxLength={500} />
+          <input id="group-description" type="text" name="description" defaultValue={group?.description} maxLength={500} />
         </label>
       </div>
       <Status state={state} />
