@@ -8,7 +8,7 @@ import createClient from '@/lib/supabase/server';
 
 export const metadata: Metadata = { title: 'Manage apps' };
 
-const KIND_LABELS = { internal: 'Internal', shared: 'Shared sign-in', external: 'External' };
+const KIND_LABELS = { internal: 'Internal', shared: 'Shared sign-in', external: 'External', oauth: 'Sign in with Trenton' };
 
 const ManageApps = async () => {
   await requireRole('owner');

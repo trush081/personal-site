@@ -35,7 +35,7 @@ export interface PublicApp {
   name: string;
   description: string;
   icon_url: string | null;
-  kind: 'internal' | 'shared' | 'external';
+  kind: 'internal' | 'shared' | 'external' | 'oauth';
   url: string | null;
 }
 

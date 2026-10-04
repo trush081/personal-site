@@ -313,3 +313,34 @@ body:has(.dashboard-shell) {
 		padding: 0;
 	}
 }
+
+.dashboard-credentials {
+	border: solid 1px _palette(accent);
+	margin: 1.5em 0;
+	padding: 1.25em;
+
+	label {
+		display: block;
+		margin-top: 1em;
+	}
+
+	input {
+		font-family: _font(family-fixed);
+	}
+}
+
+.dashboard-setup {
+	dt {
+		font-weight: _font(weight-bold);
+		margin-top: 1em;
+	}
+
+	dd {
+		margin-left: 0;
+		overflow-wrap: anywhere;
+	}
+}
+
+#consent .consent-actions button {
+	margin-right: 1em;
+}

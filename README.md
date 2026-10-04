@@ -36,6 +36,8 @@ To enable Google Analytics, copy `sample.env` to `.env.local` and set `NEXT_PUBL
 
 Your own projects on `trentonrush.com` subdomains can use this site's accounts and access rules. See [docs/shared-sign-in.md](./docs/shared-sign-in.md).
 
+Apps on other Supabase projects can use these accounts as a login provider ("Sign in with Trenton"). See [docs/sign-in-with-trenton.md](./docs/sign-in-with-trenton.md).
+
 ## Deploying
 
 Vercel deploys `main` automatically on every push, and builds a preview deployment for every other branch and pull request.

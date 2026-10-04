@@ -2,7 +2,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-import { AccessForm, AppForm, DeleteButton } from '@/components/Dashboard/ManageForms';
+import {
+  AccessForm, AppForm, DeleteButton, RegenerateSecretButton,
+} from '@/components/Dashboard/ManageForms';
 import { APP_COLUMNS, type App } from '@/lib/apps';
 import { requireRole } from '@/lib/auth';
 import createClient from '@/lib/supabase/server';
@@ -74,6 +76,43 @@ const EditApp = async ({ params }: { params: Promise<{ id: string }> }) => {
             <p className="dashboard-error">
               Shared sign-in only works for projects on trentonrush.com or its subdomains. Use the External type
               for other domains.
+            </p>
+          )}
+        </>
+      )}
+
+      {current.kind === 'oauth' && (
+        <>
+          <h3 className="dashboard-section-heading">Sign in with Trenton setup</h3>
+          {current.oauth_client_id ? (
+            <>
+              <p className="dashboard-help">
+                In the other app&apos;s Supabase project, go to Authentication &rarr; Providers and add a custom
+                provider with <strong>Auto-discovery (OIDC)</strong> using these values:
+              </p>
+              <dl className="dashboard-setup">
+                <dt>Issuer URL</dt>
+                <dd><code>{`${process.env.NEXT_PUBLIC_SUPABASE_URL}/auth/v1`}</code></dd>
+                <dt>Client ID</dt>
+                <dd><code>{current.oauth_client_id}</code></dd>
+                <dt>Client secret</dt>
+                <dd>Shown once when the app was added. Lost it? Create a new one below.</dd>
+                <dt>Scopes</dt>
+                <dd><code>openid email profile</code></dd>
+                <dt>Identifier (suggestion)</dt>
+                <dd><code>custom:trenton</code></dd>
+              </dl>
+              <p className="dashboard-help">
+                Then sign in from that app with{' '}
+                <code>{"supabase.auth.signInWithOAuth({ provider: 'custom:trenton' })"}</code>. People who
+                don&apos;t have access to this app are turned away on the consent page.
+              </p>
+              <RegenerateSecretButton appId={current.id} />
+            </>
+          ) : (
+            <p className="dashboard-error">
+              This app isn&apos;t registered for sign-in yet. Check that the OAuth server is enabled in Supabase
+              (Authentication &rarr; OAuth Server), then save the app again.
             </p>
           )}
         </>

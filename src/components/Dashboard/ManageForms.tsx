@@ -4,15 +4,29 @@ import { useActionState, useTransition, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 import {
-  deleteApp, deleteGroup, saveApp, saveAppAccess, saveGroup, saveGroupMembers,
+  deleteApp, deleteGroup, regenerateOAuthSecret, saveApp, saveAppAccess, saveGroup, saveGroupMembers,
 } from '@/lib/actions/manage';
 import type { ActionResult } from '@/lib/actions/auth';
 import type { App } from '@/lib/apps';
+
+// Client credentials are only ever shown once, right after they're created.
+const Credentials = ({ credentials }: { credentials: NonNullable<ActionResult['credentials']> }) => (
+  <div className="dashboard-credentials" role="status">
+    <p><strong>Copy these now.</strong> The secret won&apos;t be shown again (you can create a new one later).</p>
+    <label htmlFor="cred-id">Client ID
+      <input id="cred-id" type="text" readOnly value={credentials.clientId} onFocus={(e) => e.target.select()} />
+    </label>
+    <label htmlFor="cred-secret">Client secret
+      <input id="cred-secret" type="text" readOnly value={credentials.clientSecret} onFocus={(e) => e.target.select()} />
+    </label>
+  </div>
+);
 
 const Status = ({ state }: { state?: ActionResult }) => (
   <>
     {state?.error && <p className="dashboard-error" role="alert">{state.error}</p>}
     {state?.ok && <p className="dashboard-ok" role="status">{state.message}</p>}
+    {state?.credentials && <Credentials credentials={state.credentials} />}
   </>
 );
 
@@ -45,14 +59,32 @@ export const AppForm = ({ app }: { app?: App }) => {
             <option value="internal">Internal: a page inside this site</option>
             <option value="shared">Shared sign-in: my project on a trentonrush.com subdomain</option>
             <option value="external">External: a link to another site or tool</option>
+            <option value="oauth">Sign in with Trenton: an app that uses these accounts to log in</option>
           </select>
         </label>
       </div>
       {kind !== 'internal' && (
         <div>
-          <label htmlFor="app-url">URL
+          <label htmlFor="app-url">{kind === 'oauth' ? 'App URL (where people open it)' : 'URL'}
             <input id="app-url" name="url" type="url" defaultValue={app?.url ?? ''} required placeholder="https://" />
           </label>
+        </div>
+      )}
+      {kind === 'oauth' && (
+        <div>
+          <label htmlFor="app-redirects">Callback URLs (one per line, exact match)
+            <textarea
+              id="app-redirects"
+              name="redirect_uris"
+              rows={3}
+              required
+              defaultValue={app?.oauth_redirect_uris.join('\n')}
+              placeholder="https://<other-project-ref>.supabase.co/auth/v1/callback"
+            />
+          </label>
+          <p className="dashboard-help">
+            For another Supabase project, this is its Callback URL, shown when you add the custom provider there.
+          </p>
         </div>
       )}
       <div>
@@ -175,6 +207,23 @@ export const DeleteButton = ({ kind, id, name, redirectTo }: {
     <>
       <button type="button" onClick={onClick} disabled={pending}>{pending ? 'Deleting…' : `Delete ${kind}`}</button>
       {error && <p className="dashboard-error" role="alert">{error}</p>}
+    </>
+  );
+};
+
+export const RegenerateSecretButton = ({ appId }: { appId: string }) => {
+  const [pending, startTransition] = useTransition();
+  const [state, setState] = useState<ActionResult>();
+
+  const onClick = () => {
+    if (!window.confirm('Create a new client secret? The current one stops working right away.')) return;
+    startTransition(async () => setState(await regenerateOAuthSecret(appId)));
+  };
+
+  return (
+    <>
+      <button type="button" onClick={onClick} disabled={pending}>{pending ? 'Creating…' : 'Create new secret'}</button>
+      <Status state={state} />
     </>
   );
 };

@@ -9,6 +9,8 @@ export interface ActionResult {
   ok: boolean;
   error?: string;
   message?: string;
+  // Shown once after registering a "Sign in with Trenton" app or rotating its secret.
+  credentials?: { clientId: string; clientSecret: string };
 }
 
 export const signIn = async (_prev: ActionResult | undefined, formData: FormData): Promise<ActionResult> => {
