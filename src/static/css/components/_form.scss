@@ -44,6 +44,9 @@
 	input[type="password"],
 	input[type="email"],
 	input[type="tel"],
+	input[type="url"],
+	input[type="number"],
+	input[type="search"],
 	select,
 	textarea {
 		@include vendor('appearance', 'none');
@@ -95,8 +98,22 @@
 	input[type="text"],
 	input[type="password"],
 	input[type="email"],
+	input[type="tel"],
+	input[type="url"],
+	input[type="number"],
+	input[type="search"],
 	select {
 		height: _size(element-height);
+	}
+
+	// Native dropdown menus use the browser's colors; match the dark theme.
+	select {
+		color-scheme: dark;
+
+		option {
+			background: _palette(bg-alt);
+			color: _palette(fg);
+		}
 	}
 
 	textarea {
@@ -144,7 +161,7 @@
 				background: _palette(fg-bold);
 				border-color: _palette(fg-bold);
 				color: _palette(bg);
-				content: '\f00c';
+				content: '\2713'; // check mark (the theme's icon font isn't loaded)
 			}
 		}
 
