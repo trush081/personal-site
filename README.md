@@ -8,15 +8,29 @@ Built with [Next.js](https://nextjs.org/) (App Router, TypeScript) and SCSS, and
 
 ```
 src/
-  app/          # routes (one folder per page), root layout, sitemap and robots
+  app/          # routes: public pages, /login, /dashboard (signed-in area), /oauth/consent
+  apps/         # internal apps shown inside the dashboard (see registry.tsx)
   components/   # React components
-  data/         # site content - edit these to update the site
-  lib/          # shared hooks
+  data/         # fallback content, used only if the database is unreachable
+  lib/          # auth, content, apps, and server actions
   static/css/   # SCSS styles
 public/         # images, favicons, and other static files
+supabase/       # database migrations and seed data
+docs/           # setup guides
 ```
 
-Most updates only touch `src/data/`: `about.md` for the About page, `resume/` for the resume, `projects.ts`, `contact.ts`, and `stats/`.
+## Content and accounts
+
+Site content (About, resume, skills, projects, contact links, stats) lives in Supabase and is edited
+at **/dashboard** by admins and owners. The files in `src/data/` are only a fallback if the database
+can't be reached.
+
+- **Roles:** `user` (own account), `admin` (also edits site content), `owner` (also manages users,
+  apps, and groups).
+- **Apps:** pages, sites, and projects people can open from their Overview, managed under
+  **Manage -> Apps**. Visibility is public, members, or restricted to chosen people and groups.
+- **Database:** schema changes are in `supabase/migrations/`, applied in order. `supabase/seed.sql`
+  holds the initial content (regenerate with `node scripts/seed.mts`).
 
 ## Development
 
@@ -24,13 +38,19 @@ Requires [node](https://nodejs.org/) >= 22; 24 is recommended (`nvm use` picks u
 
 ```bash
 npm install
-npm run dev       # http://localhost:3000
+cp sample.env .env.local   # then fill in the values
+npm run dev                # http://localhost:3000
 npm run lint
 npm run typecheck
 npm run build
 ```
 
-To enable Google Analytics, copy `sample.env` to `.env.local` and set `NEXT_PUBLIC_GA_ID`. In production, set it as an environment variable in the Vercel project.
+Environment variables (see `sample.env`):
+
+- `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`: safe to expose.
+- `SUPABASE_SECRET_KEY`: **server only, never commit it or prefix it with `NEXT_PUBLIC_`.** Needed to
+  add/delete users and to manage "Sign in with Trenton" apps. Mark it Sensitive in Vercel.
+- `NEXT_PUBLIC_GA_ID`: optional Google Analytics 4 ID.
 
 ## Sign in with Trenton
 

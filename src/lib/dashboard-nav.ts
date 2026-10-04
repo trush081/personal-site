@@ -57,4 +57,3 @@ export const navFor = (auth: AuthState, apps: App[] = []): NavItem[] => {
   return items;
 };
 
-export default navItems;
