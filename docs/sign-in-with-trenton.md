@@ -5,9 +5,6 @@ site's accounts to sign people in, the same way "Sign in with Google" works. Thi
 Supabase project acts as the identity provider (Supabase OAuth 2.1 server, currently in
 beta), and its apps, groups, and access rules decide who may sign in.
 
-For your own projects that use **this** Supabase project directly, see
-[shared-sign-in.md](./shared-sign-in.md) instead.
-
 ## How a sign-in works
 
 1. Someone clicks "Sign in with Trenton" in the other app.

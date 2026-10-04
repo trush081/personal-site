@@ -1,6 +1,6 @@
 import createClient from '@/lib/supabase/server';
 
-export type AppKind = 'internal' | 'shared' | 'external' | 'oauth';
+export type AppKind = 'internal' | 'external' | 'oauth';
 export type AppVisibility = 'public' | 'members' | 'restricted';
 
 export interface App {

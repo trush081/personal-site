@@ -57,7 +57,6 @@ export const AppForm = ({ app }: { app?: App }) => {
         <label htmlFor="app-kind">Type
           <select id="app-kind" name="kind" value={kind} onChange={(e) => setKind(e.target.value as App['kind'])}>
             <option value="internal">Internal: a page inside this site</option>
-            <option value="shared">Shared sign-in: my project on a trentonrush.com subdomain</option>
             <option value="external">External: a link to another site or tool</option>
             <option value="oauth">Sign in with Trenton: an app that uses these accounts to log in</option>
           </select>

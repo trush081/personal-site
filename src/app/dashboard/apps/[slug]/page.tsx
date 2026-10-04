@@ -27,7 +27,7 @@ const AppPage = async ({ params }: Props) => {
 
   const app = await getApp(slug);
   if (!app) notFound();
-  // Shared and external apps live elsewhere.
+  // External and sign-in apps live elsewhere.
   if (app.kind !== 'internal' && app.url) redirect(app.url);
 
   const Component = internalApps[app.slug];

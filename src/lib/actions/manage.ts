@@ -19,7 +19,7 @@ const refresh = () => {
   revalidatePath('/projects');
 };
 
-const KINDS = ['internal', 'shared', 'external', 'oauth'];
+const KINDS = ['internal', 'external', 'oauth'];
 const VISIBILITIES = ['public', 'members', 'restricted'];
 const SLUG = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;

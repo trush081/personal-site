@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation';
 
-import { safeRedirect } from '@/lib/supabase/cookies';
+import { safeRedirect } from '@/lib/redirect';
 import createClient from '@/lib/supabase/server';
 
 export interface ActionResult {

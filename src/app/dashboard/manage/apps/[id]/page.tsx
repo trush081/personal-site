@@ -62,25 +62,6 @@ const EditApp = async ({ params }: { params: Promise<{ id: string }> }) => {
         </p>
       )}
 
-      {current.kind === 'shared' && (
-        <>
-          <h3 className="dashboard-section-heading">Connecting the project</h3>
-          <p className="dashboard-help">
-            In the project at {current.url}, use this site&apos;s Supabase URL and publishable key, set{' '}
-            <code>APP_SLUG={current.slug}</code>, and check access with{' '}
-            <code>{`supabase.rpc('has_app_access', { app_slug: '${current.slug}' })`}</code>. Send signed-out
-            visitors to <code>https://www.trentonrush.com/login?next=…</code>. The full setup, including a
-            ready-made proxy, is in <code>docs/shared-sign-in.md</code>.
-          </p>
-          {!current.url?.match(/^https:\/\/([a-z0-9-]+\.)*trentonrush\.com(\/|$)/i) && (
-            <p className="dashboard-error">
-              Shared sign-in only works for projects on trentonrush.com or its subdomains. Use the External type
-              for other domains.
-            </p>
-          )}
-        </>
-      )}
-
       {current.kind === 'oauth' && (
         <>
           <h3 className="dashboard-section-heading">Sign in with Trenton setup</h3>

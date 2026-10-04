@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation';
 import Main from '@/components/Template/Main';
 import LoginForm from '@/components/Dashboard/LoginForm';
 import { getAuthState } from '@/lib/auth';
-import { safeRedirect } from '@/lib/supabase/cookies';
+import { safeRedirect } from '@/lib/redirect';
 
 export const metadata: Metadata = {
   title: 'Sign in',
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 const Login = async ({ searchParams }: { searchParams: Promise<{ next?: string }> }) => {
   const { next } = await searchParams;
-  // Already signed in (e.g. arriving from a subdomain app): go straight back.
+  // Already signed in: go straight to where they were headed.
   if ((await getAuthState()).status !== 'signed-out') redirect(safeRedirect(next));
 
   return (
