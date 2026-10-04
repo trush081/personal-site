@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import createClient from '@/lib/supabase/client';
 
-// Shows "Sign in" or "Dashboard" depending on whether the visitor has a session.
+// Shows "Sign in" or "Overview" depending on whether the visitor has a session.
 // Checked in the browser so the public pages can stay static.
 const AccountLink = ({ onClick, render }: {
   onClick?: () => void;
@@ -22,7 +22,7 @@ const AccountLink = ({ onClick, render }: {
     return () => subscription.unsubscribe();
   }, []);
 
-  const label = signedIn ? 'Dashboard' : 'Sign in';
+  const label = signedIn ? 'Overview' : 'Sign in';
 
   return (
     <Link href={signedIn ? '/dashboard' : '/login'} onClick={onClick}>

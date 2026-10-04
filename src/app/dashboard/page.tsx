@@ -25,7 +25,7 @@ const Overview = async () => {
     <>
       <header>
         <div className="title">
-          <h2>Dashboard</h2>
+          <h2>Overview</h2>
           <p>Welcome back{auth.email ? `, ${auth.email}` : ''}</p>
         </div>
       </header>

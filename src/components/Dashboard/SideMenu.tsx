@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import { signOut } from '@/lib/actions/auth';
 import type { NavItem } from '@/lib/dashboard-nav';
 
 const SideMenu = ({ items, email, role }: { items: NavItem[]; email?: string; role: string }) => {
@@ -37,7 +38,12 @@ const SideMenu = ({ items, email, role }: { items: NavItem[]; email?: string; ro
           ))}
         </ul>
       </nav>
-      <Link href="/" className="dashboard-back">&larr; View site</Link>
+      <div className="dashboard-footer">
+        <Link href="/" className="dashboard-back">&larr; View site</Link>
+        <form action={signOut}>
+          <button type="submit" className="small">Sign out</button>
+        </form>
+      </div>
     </aside>
   );
 };

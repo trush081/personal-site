@@ -16,25 +16,44 @@
 	color: #ff8a8a;
 }
 
-.dashboard {
-	@include vendor('display', 'flex');
-	@include vendor('align-items', 'flex-start');
-	gap: 2em;
+// The signed-in area has no site header, so drop the body offset that makes room for it.
+body:has(.dashboard-shell) {
+	padding-top: 0;
+}
 
-	.dashboard-content {
-		@include vendor('flex', '1');
-		min-width: 0;
-		margin-bottom: 0;
-	}
+.dashboard-shell {
+	@include vendor('display', 'flex');
+	@include vendor('align-items', 'stretch');
+	min-height: 100vh;
+}
+
+.dashboard-main {
+	@include vendor('flex', '1');
+	min-width: 0;
+	padding: 3em;
+}
+
+.dashboard-content {
+	margin-bottom: 0;
+	max-width: 70em;
 }
 
 .dashboard-menu {
-	@include vendor('flex', '0 0 15em');
+	@include vendor('display', 'flex');
+	@include vendor('flex-direction', 'column');
+	@include vendor('flex', '0 0 16em');
 	background: _palette(bg);
-	border: solid 1px _palette(border);
-	padding: 1.5em;
+	border-right: solid 1px _palette(border);
+	height: 100vh;
+	overflow-y: auto;
+	padding: 2em 1.5em;
 	position: sticky;
-	top: 5.5em;
+	top: 0;
+	width: 16em;
+
+	nav {
+		@include vendor('flex', '1');
+	}
 
 	ul {
 		list-style: none;
@@ -76,11 +95,15 @@
 			padding: 0.4em 0;
 		}
 	}
+}
+
+.dashboard-footer {
+	border-top: solid 1px _palette(border);
+	margin-top: 1em;
+	padding-top: 1em;
 
 	.dashboard-back {
-		border-top: solid 1px _palette(border);
-		margin-top: 1em;
-		padding-top: 1.25em;
+		margin-bottom: 0.75em;
 	}
 }
 
@@ -233,29 +256,21 @@
 }
 
 @include breakpoint(medium) {
-	.dashboard {
+	.dashboard-shell {
 		@include vendor('flex-direction', 'column');
-		@include vendor('align-items', 'stretch');
 	}
 
 	.dashboard-menu {
 		@include vendor('flex', 'none');
+		border-bottom: solid 1px _palette(border);
+		border-right: 0;
+		height: auto;
+		overflow-y: visible;
 		position: static;
-	}
-}
-
-.dashboard-help {
-	color: _palette(fg-light);
-	font-size: 0.9em;
-}
-
-.dashboard-users {
-	select {
-		height: 2.25em;
-		min-width: 7em;
+		width: 100%;
 	}
 
-	td {
-		vertical-align: middle;
+	.dashboard-main {
+		padding: 1.5em;
 	}
 }
