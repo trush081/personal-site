@@ -73,6 +73,19 @@ Vercel's Git integration deploys `main` to production and builds previews for ev
 and PR. There is no deploy workflow in GitHub Actions; don't add one (it would double-deploy).
 `main` is protected: work on a branch and open a PR.
 
+### Checking deploys (Vercel MCP connector)
+
+- Scope: team `trush081s-projects` (`team_AefRyb16iKPs1jA1pRYZDGN4`), project `personal-site`
+  (`prj_jIv2BbnxA9eMEv3LAcEIgVPmyyVh`). Pass `teamId` explicitly; `list_teams` returns nothing for
+  this Hobby account. A 403 "not authorized for scope" means call `authorize_team_access` and give
+  the owner the link.
+- After pushing a branch: `list_deployments` with `branch`, wait for `READY`, then load pages with
+  `web_fetch_vercel_url` (it gets past preview protection). If the state is `ERROR`, read the build
+  logs before changing code.
+- After a merge to `main`: confirm the production deploy is `READY` and check `get_runtime_errors`.
+- Read-only by default: don't change env vars, domains, or promote/roll back without the owner
+  asking.
+
 ## Style
 
 - Path alias `@/*` → `src/*`. Arrow-function components, 2-space indent, single quotes, semicolons.
