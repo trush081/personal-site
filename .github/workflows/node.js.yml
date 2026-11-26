@@ -1,4 +1,5 @@
-# Lints, type-checks, and builds the static export on every push and pull request.
+# Lints, type-checks, and builds on every push to main and every pull request.
+# Deploys are handled by Vercel's Git integration, not by this workflow.
 
 name: Node.js CI
 
@@ -6,21 +7,28 @@ on:
   push:
     branches: [ main ]
   pull_request:
-    branches: [ main ]
+
+permissions:
+  contents: read
+
+# A new push to the same PR/branch cancels the run still in progress.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     strategy:
       matrix:
         node-version: [22.x, 24.x]
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v5
       with:
         node-version: ${{ matrix.node-version }}
         cache: npm
@@ -29,5 +37,5 @@ jobs:
       run: npm run lint
     - name: Type check
       run: npm run typecheck
-    - name: Build static export
+    - name: Build
       run: npm run build
