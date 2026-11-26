@@ -12,11 +12,31 @@ npm ci
 npm run lint        # eslint .
 npm run typecheck   # tsc --noEmit
 npm run build       # next build — works with no env vars (content falls back to src/data)
+npm test            # vitest: src/**/*.test.ts
 npm run dev         # needs .env.local (copy sample.env)
 ```
 
-Run lint, typecheck, and build before every commit. CI (`.github/workflows/node.js.yml`) runs the
-same three on Node 22 and 24. There is no test suite.
+Run lint, typecheck, `npm test`, and build before every commit. CI (`.github/workflows/node.js.yml`)
+runs those on Node 22 and 24, plus a Playwright smoke job.
+
+## Tests
+
+- Unit tests sit next to the code (`src/lib/*.test.ts`). Mock `@/lib/supabase/*` and `next/cache`;
+  tests never hit a real database.
+- `src/lib/actions/authorization.test.ts` calls every exported action in `manage.ts`, `users.ts`
+  and `content.ts` as a too-low role and expects `{ ok: false, error: 'Not authorized.' }` before
+  any Supabase client is created. New actions in those files are covered automatically; a new
+  actions file needs adding to its `modules` map.
+- E2E smoke tests (`e2e/`) run against a production build with Supabase pointed at a closed port:
+
+  ```bash
+  export NEXT_PUBLIC_SUPABASE_URL=http://127.0.0.1:54321 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_e2e
+  npm run build
+  PW_CHROMIUM_PATH=/opt/pw-browsers/chromium npm run test:e2e   # cloud sessions; omit locally
+  ```
+
+  Cloud sessions have a preinstalled Chromium that doesn't match the pinned Playwright, hence
+  `PW_CHROMIUM_PATH`. Don't run `playwright install` there.
 
 ## Next.js 16 specifics
 
@@ -43,6 +63,9 @@ same three on Node 22 and 24. There is no test suite.
   an applied migration. Keep RLS enabled on new tables.
 - `supabase/seed.sql` is generated: `node scripts/seed.mts`.
 - Internal dashboard apps register in `src/apps/registry.tsx` by slug.
+- The Supabase MCP server (`.mcp.json`) points at the production project, read-only. Use it to
+  inspect schema, RLS, logs and advisors. Write schema changes as migration files; the owner
+  applies them. Supabase records applied migrations by timestamp, not by the `0001_` file names.
 
 ## Deploy
 
