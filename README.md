@@ -23,7 +23,8 @@ docs/           # setup guides
 
 Site content (About, resume, skills, projects, contact links, stats) lives in Supabase and is edited
 at **/dashboard** by admins and owners. The files in `src/data/` are only a fallback if the database
-can't be reached.
+can't be reached. Dashboard edits aren't copied back into `src/data/`, so the fallback may be older
+than the live site.
 
 - **Roles:** `user` (own account), `admin` (also edits site content), `owner` (also manages users,
   apps, and groups).
