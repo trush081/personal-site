@@ -36,6 +36,18 @@ test.describe('signed out', () => {
   }
 });
 
+// Sign-in pages must not be frameable (clickjacking); check a static and a dynamic route.
+for (const path of ['/', '/login', '/oauth/consent?authorization_id=abc12345']) {
+  test(`${path} sends security headers`, async ({ request }) => {
+    const res = await request.get(path, { maxRedirects: 0 });
+    const h = res.headers();
+    expect(h['content-security-policy']).toContain("frame-ancestors 'none'");
+    expect(h['x-frame-options']).toBe('DENY');
+    expect(h['x-content-type-options']).toBe('nosniff');
+    expect(h['referrer-policy']).toBe('strict-origin-when-cross-origin');
+  });
+}
+
 test('legacy /admin URLs redirect', async ({ page }) => {
   await page.goto('/admin');
   await expect(page).toHaveURL(/\/login\?next=%2Fdashboard$/);

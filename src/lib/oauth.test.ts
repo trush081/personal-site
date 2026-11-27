@@ -1,6 +1,27 @@
 import { describe, expect, it } from 'vitest';
 
-import { baseUrl, describeScopes, isAuthorizationId } from './oauth';
+import { baseUrl, describeScopes, findCallbackConflicts, isAuthorizationId } from './oauth';
+
+describe('findCallbackConflicts', () => {
+  const shared = 'https://abc.supabase.co/auth/v1/callback';
+  const others = [
+    { name: 'Granite', oauth_redirect_uris: [shared, 'https://granite.example/cb'] },
+    { name: 'Legacy', oauth_redirect_uris: null },
+  ];
+
+  it('reports a callback URL another app already uses', () => {
+    expect(findCallbackConflicts([shared], others)).toEqual([{ uri: shared, appName: 'Granite' }]);
+  });
+
+  it('allows URLs nobody else uses', () => {
+    expect(findCallbackConflicts(['https://new.example/cb'], others)).toEqual([]);
+  });
+
+  it('is exact: a different path or host is not a conflict', () => {
+    expect(findCallbackConflicts(['https://abc.supabase.co/auth/v1/callback/'], others)).toEqual([]);
+    expect(findCallbackConflicts(['https://xyz.supabase.co/auth/v1/callback'], others)).toEqual([]);
+  });
+});
 
 describe('isAuthorizationId', () => {
   it('accepts the expected shape', () => {

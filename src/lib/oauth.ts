@@ -15,6 +15,16 @@ export const baseUrl = (url: string) => {
   }
 };
 
+// Callback URLs another app already uses. They must be unique across apps: when Supabase
+// skips consent (approved before) it only gives us the callback URL, so a shared URL would
+// make it ambiguous which app's access rules apply.
+export const findCallbackConflicts = (
+  uris: string[],
+  otherApps: { name: string; oauth_redirect_uris: string[] | null }[],
+) => uris.flatMap((uri) => otherApps
+  .filter((app) => app.oauth_redirect_uris?.includes(uri))
+  .map((app) => ({ uri, appName: app.name })));
+
 export interface OAuthAccess {
   appName: string | null; // null: not a registered "Sign in with Trenton" app
   allowed: boolean;

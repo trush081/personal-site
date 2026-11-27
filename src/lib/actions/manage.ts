@@ -4,6 +4,7 @@ import { revalidatePath, updateTag } from 'next/cache';
 
 import { getAuthState } from '@/lib/auth';
 import { PUBLIC_APPS_TAG } from '@/lib/content';
+import { findCallbackConflicts } from '@/lib/oauth';
 import createAdminClient, { isAdminApiConfigured } from '@/lib/supabase/admin';
 import createClient from '@/lib/supabase/server';
 import type { ActionResult } from './auth';
@@ -149,6 +150,18 @@ export const saveApp = async (_prev: ActionResult | undefined, formData: FormDat
 
   const supabase = await createClient();
   const isUpdate = Boolean(id && UUID.test(id));
+
+  if (app.kind === 'oauth') {
+    let others = supabase.from('apps').select('name, oauth_redirect_uris').eq('kind', 'oauth');
+    if (isUpdate) others = others.neq('id', id);
+    const { data: otherApps, error: othersError } = await others;
+    if (othersError) return { ok: false, error: describe(othersError.message) };
+    const [conflict] = findCallbackConflicts(app.oauth_redirect_uris, otherApps ?? []);
+    if (conflict) {
+      return { ok: false, error: `${conflict.uri} is already a callback URL for ${conflict.appName}. Each app needs its own.` };
+    }
+  }
+
   const { data: existing } = isUpdate
     ? await supabase.from('apps').select('oauth_client_id').eq('id', id).maybeSingle()
     : { data: null };
