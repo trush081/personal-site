@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
-import { Raleway, Source_Sans_3 } from 'next/font/google';
+import localFont from 'next/font/local';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { config } from '@fortawesome/fontawesome-svg-core';
 
@@ -11,16 +11,25 @@ import '@/static/css/main.scss'; // All of our styles
 // FontAwesome's CSS is imported above, so don't inject it again at runtime.
 config.autoAddCss = false;
 
-const sourceSans = Source_Sans_3({
-  subsets: ['latin'],
-  weight: ['400', '700'],
+// Self-hosted (latin subset, from Fontsource; OFL licenses alongside the files) so builds
+// don't download from Google Fonts, which made CI fail intermittently.
+const sourceSans = localFont({
+  src: [
+    { path: '../static/fonts/source-sans-3-latin-400-normal.woff2', weight: '400', style: 'normal' },
+    { path: '../static/fonts/source-sans-3-latin-700-normal.woff2', weight: '700', style: 'normal' },
+  ],
   variable: '--font-source-sans',
+  display: 'swap',
 });
 
-const raleway = Raleway({
-  subsets: ['latin'],
-  weight: ['400', '800', '900'],
+const raleway = localFont({
+  src: [
+    { path: '../static/fonts/raleway-latin-400-normal.woff2', weight: '400', style: 'normal' },
+    { path: '../static/fonts/raleway-latin-800-normal.woff2', weight: '800', style: 'normal' },
+    { path: '../static/fonts/raleway-latin-900-normal.woff2', weight: '900', style: 'normal' },
+  ],
   variable: '--font-raleway',
+  display: 'swap',
 });
 
 const { NEXT_PUBLIC_GA_ID } = process.env;
