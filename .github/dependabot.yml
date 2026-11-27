@@ -1,0 +1,12 @@
+# npm packages are updated by a weekly scheduled Claude task (minor/patch, with tests run),
+# so Dependabot only watches the GitHub Actions used by CI, to avoid competing npm PRs.
+# Security alerts for npm still come from GitHub's Dependabot alerts setting.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      actions:
+        patterns: ['*']
