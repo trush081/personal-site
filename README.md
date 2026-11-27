@@ -40,9 +40,7 @@ Requires [node](https://nodejs.org/) >= 22; 24 is recommended (`nvm use` picks u
 npm install
 cp sample.env .env.local   # then fill in the values
 npm run dev                # http://localhost:3000
-npm run lint
-npm run typecheck
-npm run build
+npm run check              # lint, typecheck, unit tests, build
 ```
 
 Environment variables (see `sample.env`):

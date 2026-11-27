@@ -14,9 +14,10 @@ npm run typecheck   # tsc --noEmit
 npm run build       # next build — works with no env vars (content falls back to src/data)
 npm test            # vitest: src/**/*.test.ts
 npm run dev         # needs .env.local (copy sample.env)
+npm run check       # lint + typecheck + test + build, in that order
 ```
 
-Run lint, typecheck, `npm test`, and build before every commit. CI (`.github/workflows/node.js.yml`)
+Run `npm run check` (lint, typecheck, `npm test`, build) before every commit. CI (`.github/workflows/node.js.yml`)
 runs those on Node 22 and 24, plus a Playwright smoke job.
 
 ## Tests
@@ -58,7 +59,9 @@ runs those on Node 22 and 24, plus a Playwright smoke job.
 ## Data
 
 - Content lives in Supabase table `site_content`; `src/data/` is the fallback when Supabase is
-  unreachable. If you change a content shape, update both and `src/lib/sections.ts`.
+  unreachable. Editing `src/data/` does not change the live site; content edits go through the
+  dashboard. Nothing copies dashboard edits back into `src/data/`, so the fallback can lag.
+  If you change a content shape, update both and `src/lib/sections.ts`.
 - Schema changes: add a new numbered file in `supabase/migrations/` (`0009_*.sql`, ...). Never edit
   an applied migration. Keep RLS enabled on new tables.
 - `supabase/seed.sql` is generated: `node scripts/seed.mts`.
