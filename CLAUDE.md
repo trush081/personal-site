@@ -62,7 +62,7 @@ runs those on Node 22 and 24, plus a Playwright smoke job.
   unreachable. Editing `src/data/` does not change the live site; content edits go through the
   dashboard. Nothing copies dashboard edits back into `src/data/`, so the fallback can lag.
   If you change a content shape, update both and `src/lib/sections.ts`.
-- Schema changes: add a new numbered file in `supabase/migrations/` (next is `0010_*.sql`). Never edit
+- Schema changes: add a file in `supabase/migrations/` numbered one past the highest existing one. Never edit
   an applied migration. Keep RLS enabled on new tables.
 - `supabase/seed.sql` is generated: `node scripts/seed.mts`.
 - Internal dashboard apps register in `src/apps/registry.tsx` by slug.
