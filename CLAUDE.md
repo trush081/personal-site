@@ -63,9 +63,20 @@ runs those on Node 22 and 24, plus a Playwright smoke job.
   an applied migration. Keep RLS enabled on new tables.
 - `supabase/seed.sql` is generated: `node scripts/seed.mts`.
 - Internal dashboard apps register in `src/apps/registry.tsx` by slug.
-- The Supabase MCP server (`.mcp.json`) points at the production project, read-only. Use it to
-  inspect schema, RLS, logs and advisors. Write schema changes as migration files; the owner
-  applies them. Supabase records applied migrations by timestamp, not by the `0001_` file names.
+- The Supabase MCP server (`.mcp.json`) points at the **production** project with write access.
+  The owner wants Claude to apply changes, within these rules:
+  - **Schema changes only via `apply_migration`, and only from a migration file in this repo**
+    (`supabase/migrations/00NN_*.sql`, same name). Write the file first, so the repo always
+    matches the database. Never run DDL through `execute_sql`.
+  - Apply a migration only after its PR's CI is green and the owner has said to apply it, or the
+    owner explicitly asked for that change in the session. Before applying, run the new SQL's
+    logic read-only against real data where possible.
+  - After applying: check with `list_migrations` and run `get_advisors` (security), and report the
+    result.
+  - **Ask first** before anything destructive or hard to undo: `drop`, `truncate`, `delete`/`update`
+    without a narrow `where`, removing RLS or policies, changing roles or grants, or touching
+    `auth.*` tables. Data fixes (DML) go through `execute_sql` and must be stated before running.
+  - Supabase records applied migrations by timestamp, not by the `0001_` file names.
 
 ## Deploy
 
